@@ -7,11 +7,19 @@
 
 (def ^:const price-menu {:latte 0.5 :mocha 0.4})
 
+(def ^:const orders-file "orders.edn")
+
 (defn- buy-coffee [type]
   (println "How many coffees do you want to buy?")
   (let [choice (.nextInt input)
         price (utils/calculate-coffee-price price-menu type choice)]
+    (utils/save-coffee-order orders-file type choice price)
     (utils/display-bought-coffee-message type choice price)))
+
+(defn show-orders []
+       (println "\n")
+       (doseq [order (utils/load-orders orders-file)]
+              (println (utils/display-order order))))
 
 (defn- show-menu []
   (println "| Available coffees |")

@@ -1,0 +1,1 @@
+{:type :mocha, :number 1, :price 0.4}{:type :latte, :number 5, :price 2.5}{:type :latte, :number 1, :price 0.5}
