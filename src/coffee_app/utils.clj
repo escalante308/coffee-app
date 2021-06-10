@@ -17,7 +17,7 @@
         (throw e)))))
 
 (defn load-orders
-  "Reads a sequence of orders stored in file."
+  "Reads a sequence of orders stored in file at path."
   [file]
   (if (file-exists? file)
     (with-open [r (PushbackReader. (io/reader file))]
@@ -35,8 +35,19 @@
   (str "Bought " (:number order) " cups of " (name (:type order)) " for €"
        (:price order)))
 
+(def ^:const currencies {:euro {:countries #{"France" "Spain"} :symbol "€"}
+                         :dollar {:countries #{"USA"} :symbol "$"}})
+
+(unfinished get-currency)
+
+(def test-currency :euro)
+
 (defn display-bought-coffee-message [type number total]
-  (println "Buying" number (name type) "coffees for total:€" total))
+  (println "Buying" number (name type) "coffees for total: €" total))
+
+(defn get-bought-coffee-message-with-currency [type number total currency]
+  (format "Buying %d %s coffees for total: %s%s" number (name type)
+          (get-currency test-currency) total))
 
 (defn save-coffee-order [orders-file type number price]
   (save-to orders-file {:type type :number number :price price}))

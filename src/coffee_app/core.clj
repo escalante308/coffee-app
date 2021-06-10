@@ -13,7 +13,7 @@
   (println "How many coffees do you want to buy?")
   (let [choice (.nextInt input)
         price (utils/calculate-coffee-price price-menu type choice)]
-    (utils/save-coffee-order orders-file type choice price)
+    ;;(utils/save-coffee-order orders-file type choice price)
     (utils/display-bought-coffee-message type choice price)))
 
 (defn show-orders []
